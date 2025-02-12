@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux'
-import { removeFromCart } from '../store/cartSlice'
+import { removeFromCart, clearCart } from '../store/cartSlice'
 
 function Cart() {
   const cart = useSelector((state) => state.cart)
@@ -17,7 +17,7 @@ function Cart() {
           {cart.map((item) => (
             <div key={item.id} className='cart-item'>
               <img
-                src={item.images?.[0] || '/assets/no_image_available.png'}
+                src={item.images?.[0] || '/assets/no_image_available.svg'}
                 alt={item.title}
               />
               <div>
@@ -30,6 +30,7 @@ function Cart() {
             </div>
           ))}
           <h2>Total: ${totalPrice.toFixed(2)}</h2>
+          <button onClick={() => dispatch(clearCart())}>Clear Cart</button>
         </div>
       )}
     </div>
