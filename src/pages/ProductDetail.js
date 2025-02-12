@@ -11,6 +11,7 @@ function ProductDetail() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const placeholderImage = '/assets/no_image_available.svg'
+  const [imageUrl, setImageUrl] = useState(placeholderImage)
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -27,21 +28,27 @@ function ProductDetail() {
     fetchProduct()
   }, [id])
 
+  useEffect(() => {
+    if (product?.images?.length > 0) {
+      const img = new Image()
+      img.src = product.images[0].replace(/^"|"$/g, '')
+      img.onload = () => setImageUrl(img.src)
+      img.onerror = () => setImageUrl(placeholderImage)
+    } else {
+      setImageUrl(placeholderImage)
+    }
+  }, [product])
+
   if (loading) return <p>Loading...</p>
   if (error) return <p>{error}</p>
 
-  const imageUrl =
-    product.images?.length > 0
-      ? product.images[0].replace(/^"|"$/g, '')
-      : placeholderImage
-
   return (
     <div className='product-detail'>
-      <img src={imageUrl} alt={product.title} />
-      <h1>{product.title}</h1>
-      <p>{product.description}</p>
+      <img src={imageUrl} alt={product?.title} />
+      <h1>{product?.title}</h1>
+      <p>{product?.description}</p>
       <p>
-        <strong>Price:</strong> ${product.price}
+        <strong>Price:</strong> ${product?.price}
       </p>
       <button onClick={() => dispatch(addToCart(product))}>Add to Cart</button>
     </div>
