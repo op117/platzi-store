@@ -1,14 +1,16 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { removeFromCart, clearCart } from '../store/cartSlice'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import '../styles/Cart.css'
 
 function Cart() {
   const cart = useSelector((state) => state.cart)
   const user = useSelector((state) => state.auth.user)
   const dispatch = useDispatch()
-  const placeholderImage = '/assets/no_image_available.svg'
+  const navigate = useNavigate()
   const [expandedItems, setExpandedItems] = useState({})
+  const placeholderImage = '/assets/no_image_available.svg'
 
   if (!user) {
     return (
@@ -57,12 +59,20 @@ function Cart() {
             </div>
           ))}
           <h2 className='cart-total'>Total: ${totalPrice.toFixed(2)}</h2>
-          <button
-            className='clear-cart-btn'
-            onClick={() => dispatch(clearCart())}
-          >
-            Clear Cart
-          </button>
+          <div className='buttons-container'>
+            <button
+              className='clear-cart-btn'
+              onClick={() => dispatch(clearCart())}
+            >
+              Clear Cart
+            </button>
+            <button
+              className='checkout-btn'
+              onClick={() => navigate('/checkout')}
+            >
+              Proceed to Checkout
+            </button>
+          </div>
         </div>
       )}
     </div>

@@ -23,6 +23,11 @@ function Header() {
         <li>
           <Link to='/cart'>Cart ({cart.length})</Link>
         </li>
+        {cart.length > 0 && (
+          <li>
+            <Link to='/checkout'>Checkout</Link>
+          </li>
+        )}
         {!user ? (
           <>
             <li>
@@ -34,6 +39,7 @@ function Header() {
           </>
         ) : (
           <li className='user-info'>
+            <span>{user.name}</span>
             <button onClick={handleLogout}>Logout</button>
           </li>
         )}
