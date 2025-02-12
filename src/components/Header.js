@@ -21,7 +21,11 @@ function Header() {
           <Link to='/'>Products</Link>
         </li>
         <li>
-          <Link to='/cart'>Cart ({cart.length})</Link>
+          <li>
+            <Link to='/cart'>
+              Cart {cart.length > 0 ? `(${cart.length})` : ''}
+            </Link>
+          </li>
         </li>
         {cart.length > 0 && (
           <li>
