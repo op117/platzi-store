@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import axiosClient from '../api/axiosClient'
 import { useDispatch } from 'react-redux'
 import { addToCart } from '../store/cartSlice'
+import '../styles/ProductDetail.css'
 
 function ProductDetail() {
   const { id } = useParams()
@@ -10,8 +11,9 @@ function ProductDetail() {
   const [product, setProduct] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
-  const placeholderImage = '/assets/no_image_available.svg'
+  const placeholderImage = '/assets/no_image_available.png'
   const [imageUrl, setImageUrl] = useState(placeholderImage)
+  const [addedToCart, setAddedToCart] = useState(false)
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -39,6 +41,12 @@ function ProductDetail() {
     }
   }, [product])
 
+  const handleAddToCart = () => {
+    dispatch(addToCart(product))
+    setAddedToCart(true)
+    setTimeout(() => setAddedToCart(false), 2000)
+  }
+
   if (loading) return <p>Loading...</p>
   if (error) return <p>{error}</p>
 
@@ -50,7 +58,10 @@ function ProductDetail() {
       <p>
         <strong>Price:</strong> ${product?.price}
       </p>
-      <button onClick={() => dispatch(addToCart(product))}>Add to Cart</button>
+      <button onClick={handleAddToCart} disabled={addedToCart}>
+        {addedToCart ? 'Added!' : 'Add to Cart'}
+      </button>
+      {addedToCart && <p className='cart-message'>Product added to cart!</p>}
     </div>
   )
 }
