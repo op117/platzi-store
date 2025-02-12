@@ -1,31 +1,27 @@
 import { Link } from 'react-router-dom'
+import { useState, useEffect } from 'react'
 
 function ProductCard({ product }) {
   const placeholderImage = '/assets/no_image_available.svg'
+  const [imageUrl, setImageUrl] = useState(placeholderImage)
 
-  let imageUrl = placeholderImage
-
-  if (Array.isArray(product.images) && product.images.length > 0) {
-    let rawImage = product.images[0]
-
-    if (typeof rawImage === 'string') {
-      try {
-        imageUrl = JSON.parse(rawImage)
-      } catch (error) {
-        imageUrl = rawImage.replace(/^"|"$/g, '')
-      }
+  useEffect(() => {
+    if (Array.isArray(product.images) && product.images.length > 0) {
+      const img = new Image()
+      img.src = product.images[0].replace(/^"|"$/g, '')
+      img.onload = () => setImageUrl(img.src)
+      img.onerror = () => setImageUrl(placeholderImage)
     }
-  }
-
-  console.log('Product:', product)
-  console.log('Final Image URL:', imageUrl)
+  }, [product.images])
 
   return (
     <div className='product-card'>
-      <img src={imageUrl} alt={product.title} />
+      <img className='product-image' src={imageUrl} alt={product.title} />
       <h3>{product.title}</h3>
       <p>${product.price}</p>
-      <Link to={`/product/${product.id}`}>View Details</Link>
+      <Link to={`/product/${product.id}`} className='view-details'>
+        View Details
+      </Link>
     </div>
   )
 }
