@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { logout } from '../store/authSlice'
 import { logoutClearCart } from '../store/cartSlice'
+import '../styles/Header.css'
 
 function Header() {
   const dispatch = useDispatch()
@@ -14,10 +15,10 @@ function Header() {
   }
 
   return (
-    <nav>
-      <ul>
+    <nav className='header'>
+      <ul className='nav-links'>
         <li>
-          <Link to='/'>Home</Link>
+          <Link to='/'>Products</Link>
         </li>
         <li>
           <Link to='/cart'>Cart ({cart.length})</Link>
@@ -32,8 +33,8 @@ function Header() {
             </li>
           </>
         ) : (
-          <li>
-            <button onClick={handleLogout}>Logout ({user.name})</button>
+          <li className='user-info'>
+            <button onClick={handleLogout}>Logout</button>
           </li>
         )}
       </ul>
