@@ -5,6 +5,7 @@ import '../styles/Cart.css'
 function Cart() {
   const cart = useSelector((state) => state.cart)
   const dispatch = useDispatch()
+  const placeholderImage = '/assets/no_image_available.svg'
 
   const totalPrice = cart.reduce((total, item) => total + item.price, 0)
 
@@ -18,8 +19,9 @@ function Cart() {
           {cart.map((item) => (
             <div key={item.id} className='cart-item'>
               <img
-                src={item.images?.[0] || '/assets/no_image_available.svg'}
+                src={item.images?.[0] || placeholderImage}
                 alt={item.title}
+                onError={(e) => (e.target.src = placeholderImage)}
               />
               <div>
                 <h3>{item.title}</h3>
