@@ -6,6 +6,7 @@ import { logoutClearCart } from '../store/cartSlice'
 function Header() {
   const dispatch = useDispatch()
   const user = useSelector((state) => state.auth.user)
+  const cart = useSelector((state) => state.cart)
 
   const handleLogout = () => {
     dispatch(logout())
@@ -19,7 +20,7 @@ function Header() {
           <Link to='/'>Home</Link>
         </li>
         <li>
-          <Link to='/cart'>Cart</Link>
+          <Link to='/cart'>Cart ({cart.length})</Link>
         </li>
         {!user ? (
           <>
