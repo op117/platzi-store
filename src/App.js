@@ -1,15 +1,21 @@
-import React from 'react'
-import './App.css'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import Home from './pages/Home'
+import ProductDetail from './pages/ProductDetail'
+import Cart from './pages/Cart'
+import Login from './pages/Login'
+import Header from './components/Header'
 
 function App() {
   return (
-    <div className='App'>
-      <header className='App-header'>
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-      </header>
-    </div>
+    <Router>
+      <Header />
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/product/:id' element={<ProductDetail />} />
+        <Route path='/cart' element={<Cart />} />
+        <Route path='/login' element={<Login />} />
+      </Routes>
+    </Router>
   )
 }
 
