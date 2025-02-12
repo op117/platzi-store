@@ -11,7 +11,7 @@ function ProductDetail() {
   const [product, setProduct] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
-  const placeholderImage = '/assets/no_image_available.png'
+  const placeholderImage = '/assets/no_image_available.svg'
   const [imageUrl, setImageUrl] = useState(placeholderImage)
   const [addedToCart, setAddedToCart] = useState(false)
 
