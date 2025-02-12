@@ -1,11 +1,20 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { removeFromCart, clearCart } from '../store/cartSlice'
+import { useState } from 'react'
 import '../styles/Cart.css'
 
 function Cart() {
   const cart = useSelector((state) => state.cart)
   const dispatch = useDispatch()
   const placeholderImage = '/assets/no_image_available.svg'
+  const [expandedItems, setExpandedItems] = useState({})
+
+  const toggleDetails = (id) => {
+    setExpandedItems((prev) => ({
+      ...prev,
+      [id]: !prev[id],
+    }))
+  }
 
   const totalPrice = cart.reduce((total, item) => total + item.price, 0)
 
@@ -26,14 +35,25 @@ function Cart() {
               <div>
                 <h3>{item.title}</h3>
                 <p>${item.price}</p>
-                <button onClick={() => dispatch(removeFromCart(item.id))}>
-                  Remove
+                <button onClick={() => toggleDetails(item.id)}>
+                  {expandedItems[item.id] ? 'Hide Details' : 'View Details'}
                 </button>
+                {expandedItems[item.id] && (
+                  <p className='product-description'>{item.description}</p>
+                )}
               </div>
+              <button onClick={() => dispatch(removeFromCart(item.id))}>
+                Remove
+              </button>
             </div>
           ))}
-          <h2>Total: ${totalPrice.toFixed(2)}</h2>
-          <button onClick={() => dispatch(clearCart())}>Clear Cart</button>
+          <h2 className='cart-total'>Total: ${totalPrice.toFixed(2)}</h2>
+          <button
+            className='clear-cart-btn'
+            onClick={() => dispatch(clearCart())}
+          >
+            Clear Cart
+          </button>
         </div>
       )}
     </div>
