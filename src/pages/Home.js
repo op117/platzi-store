@@ -15,6 +15,8 @@ function Home() {
     priceMax: '',
   })
   const [categories, setCategories] = useState([])
+  const [currentPage, setCurrentPage] = useState(1)
+  const itemsPerPage = 8
 
   useEffect(() => {
     dispatch(getProducts())
@@ -32,10 +34,12 @@ function Home() {
 
   const handleFilterChange = (e) => {
     setFilters({ ...filters, [e.target.name]: e.target.value })
+    setCurrentPage(1)
   }
 
   const handleResetFilters = () => {
     setFilters({ title: '', category: '', priceMin: '', priceMax: '' })
+    setCurrentPage(1)
   }
 
   const filteredProducts = items.filter((product) => {
@@ -48,6 +52,12 @@ function Home() {
       (!filters.priceMax || product.price <= Number(filters.priceMax))
     )
   })
+
+  const totalPages = Math.ceil(filteredProducts.length / itemsPerPage)
+  const paginatedProducts = filteredProducts.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  )
 
   return (
     <div>
@@ -91,14 +101,34 @@ function Home() {
       </div>
 
       <div className='product-grid'>
-        {filteredProducts.length > 0 ? (
-          filteredProducts.map((product) => (
+        {paginatedProducts.length > 0 ? (
+          paginatedProducts.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))
         ) : (
           <p>No products found.</p>
         )}
       </div>
+
+      {totalPages > 1 && (
+        <div className='pagination'>
+          <button
+            onClick={() => setCurrentPage(currentPage - 1)}
+            disabled={currentPage === 1}
+          >
+            Previous
+          </button>
+          <span>
+            Page {currentPage} of {totalPages}
+          </span>
+          <button
+            onClick={() => setCurrentPage(currentPage + 1)}
+            disabled={currentPage === totalPages}
+          >
+            Next
+          </button>
+        </div>
+      )}
     </div>
   )
 }
