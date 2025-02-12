@@ -1,10 +1,16 @@
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { logout } from '../store/authSlice'
+import { logoutClearCart } from '../store/cartSlice'
 
 function Header() {
   const dispatch = useDispatch()
   const user = useSelector((state) => state.auth.user)
+
+  const handleLogout = () => {
+    dispatch(logout())
+    dispatch(logoutClearCart())
+  }
 
   return (
     <nav>
@@ -26,9 +32,7 @@ function Header() {
           </>
         ) : (
           <li>
-            <button onClick={() => dispatch(logout())}>
-              Logout ({user.name})
-            </button>
+            <button onClick={handleLogout}>Logout ({user.name})</button>
           </li>
         )}
       </ul>

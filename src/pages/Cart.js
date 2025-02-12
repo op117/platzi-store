@@ -5,9 +5,18 @@ import '../styles/Cart.css'
 
 function Cart() {
   const cart = useSelector((state) => state.cart)
+  const user = useSelector((state) => state.auth.user)
   const dispatch = useDispatch()
   const placeholderImage = '/assets/no_image_available.svg'
   const [expandedItems, setExpandedItems] = useState({})
+
+  if (!user) {
+    return (
+      <p>
+        Please <a href='/login'>log in</a> to view your cart.
+      </p>
+    )
+  }
 
   const toggleDetails = (id) => {
     setExpandedItems((prev) => ({
@@ -20,7 +29,7 @@ function Cart() {
 
   return (
     <div className='cart-page'>
-      <h1>Shopping Cart</h1>
+      <h1>{user.name}'s Cart</h1>
       {cart.length === 0 ? (
         <p>Your cart is empty.</p>
       ) : (

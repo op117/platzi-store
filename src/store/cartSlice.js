@@ -2,19 +2,23 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const loadCartFromLocalStorage = () => {
   try {
-    const storedCart = localStorage.getItem('cart')
+    const storedUser = JSON.parse(localStorage.getItem('user'))
+    if (!storedUser) return []
+    const storedCart = localStorage.getItem(`cart_${storedUser.email}`)
     return storedCart ? JSON.parse(storedCart) : []
-  } catch (error) {
-    console.error('Failed to load cart from localStorage:', error)
+  } catch {
     return []
   }
 }
 
 const saveCartToLocalStorage = (cart) => {
   try {
-    localStorage.setItem('cart', JSON.stringify(cart))
+    const storedUser = JSON.parse(localStorage.getItem('user'))
+    if (storedUser) {
+      localStorage.setItem(`cart_${storedUser.email}`, JSON.stringify(cart))
+    }
   } catch (error) {
-    console.error('Failed to save cart to localStorage:', error)
+    console.error('Failed to save cart:', error)
   }
 }
 
@@ -35,12 +39,22 @@ const cartSlice = createSlice({
       saveCartToLocalStorage(updatedCart)
       return updatedCart
     },
-    clearCart: (state) => {
-      saveCartToLocalStorage([])
+    clearCart: () => {
+      const storedUser = JSON.parse(localStorage.getItem('user'))
+      if (storedUser) {
+        localStorage.removeItem(`cart_${storedUser.email}`)
+      }
+      return []
+    },
+    logoutClearCart: () => {
+      localStorage.removeItem(
+        `cart_${JSON.parse(localStorage.getItem('user'))?.email}`
+      )
       return []
     },
   },
 })
 
-export const { addToCart, removeFromCart, clearCart } = cartSlice.actions
+export const { addToCart, removeFromCart, clearCart, logoutClearCart } =
+  cartSlice.actions
 export default cartSlice.reducer
