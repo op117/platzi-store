@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { logout } from '../store/authSlice'
 
 function Header() {
-  const cart = useSelector((state) => state.cart)
+  const dispatch = useDispatch()
+  const user = useSelector((state) => state.auth.user)
 
   return (
     <nav>
@@ -11,11 +13,24 @@ function Header() {
           <Link to='/'>Home</Link>
         </li>
         <li>
-          <Link to='/cart'>Cart ({cart.length})</Link>
+          <Link to='/cart'>Cart</Link>
         </li>
-        <li>
-          <Link to='/login'>Login</Link>
-        </li>
+        {!user ? (
+          <>
+            <li>
+              <Link to='/register'>Register</Link>
+            </li>
+            <li>
+              <Link to='/login'>Login</Link>
+            </li>
+          </>
+        ) : (
+          <li>
+            <button onClick={() => dispatch(logout())}>
+              Logout ({user.name})
+            </button>
+          </li>
+        )}
       </ul>
     </nav>
   )
