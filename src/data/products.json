@@ -1,0 +1,242 @@
+[
+  {
+    "id": 1,
+    "title": "Men's Casual T-Shirt",
+    "price": 25,
+    "description": "Soft cotton t-shirt for everyday wear.",
+    "images": [
+      "https://i.imgur.com/qNOjJje.jpeg"
+    ],
+    "category": {
+      "name": "Clothes"
+    }
+  },
+  {
+    "id": 2,
+    "title": "Slim Fit Jeans",
+    "price": 45,
+    "description": "Stylish slim fit jeans for any occasion.",
+    "images": [
+      "https://i.imgur.com/YT4BdDX.jpeg"
+    ],
+    "category": {
+      "name": "Clothes"
+    }
+  },
+  {
+    "id": 3,
+    "title": "Hoodie with Zipper",
+    "price": 60,
+    "description": "Warm and cozy hoodie for chilly days.",
+    "images": [
+      "https://i.imgur.com/sG8k9JQ.jpeg"
+    ],
+    "category": {
+      "name": "Clothes"
+    }
+  },
+  {
+    "id": 4,
+    "title": "Summer Dress",
+    "price": 40,
+    "description": "Lightweight summer dress with floral pattern.",
+    "images": [
+      "https://i.imgur.com/KhqM1JP.jpeg"
+    ],
+    "category": {
+      "name": "Clothes"
+    }
+  },
+  {
+    "id": 5,
+    "title": "Classic Polo Shirt",
+    "price": 30,
+    "description": "Timeless polo shirt with a comfortable fit.",
+    "images": [
+      "https://i.imgur.com/Tr3z9QJ.jpeg"
+    ],
+    "category": {
+      "name": "Clothes"
+    }
+  },
+  {
+    "id": 6,
+    "title": "Cargo Pants",
+    "price": 55,
+    "description": "Durable cargo pants with multiple pockets.",
+    "images": [
+      "https://i.imgur.com/hGkVvRn.jpeg"
+    ],
+    "category": {
+      "name": "Clothes"
+    }
+  },
+  {
+    "id": 7,
+    "title": "Winter Jacket",
+    "price": 120,
+    "description": "Heavy-duty winter jacket for extreme cold.",
+    "images": [
+      "https://i.imgur.com/pVhQJjo.jpeg"
+    ],
+    "category": {
+      "name": "Clothes"
+    }
+  },
+  {
+    "id": 8,
+    "title": "Formal Suit",
+    "price": 180,
+    "description": "Elegant suit for business and formal occasions.",
+    "images": [
+      "https://i.imgur.com/jKlzLNy.jpeg"
+    ],
+    "category": {
+      "name": "Clothes"
+    }
+  },
+  {
+    "id": 9,
+    "title": "Sweatpants",
+    "price": 35,
+    "description": "Comfortable sweatpants for lounging.",
+    "images": [
+      "https://i.imgur.com/X8k9Jg5.jpeg"
+    ],
+    "category": {
+      "name": "Clothes"
+    }
+  },
+  {
+    "id": 10,
+    "title": "V-Neck Sweater",
+    "price": 50,
+    "description": "Soft wool sweater with a classic V-neck.",
+    "images": [
+      "https://i.imgur.com/YcJGvNy.jpeg"
+    ],
+    "category": {
+      "name": "Clothes"
+    }
+  },
+  {
+    "id": 11,
+    "title": "Bluetooth Headphones",
+    "price": 99,
+    "description": "Wireless Bluetooth headphones with noise cancellation.",
+    "images": [
+      "https://i.imgur.com/ZANVnHE.jpeg"
+    ],
+    "category": {
+      "name": "Electronics"
+    }
+  },
+  {
+    "id": 12,
+    "title": "Smartphone 128GB",
+    "price": 699,
+    "description": "Latest model smartphone with high-resolution camera.",
+    "images": [
+      "https://i.imgur.com/YF3mliS.jpeg"
+    ],
+    "category": {
+      "name": "Electronics"
+    }
+  },
+  {
+    "id": 13,
+    "title": "Gaming Laptop",
+    "price": 1299,
+    "description": "High-performance gaming laptop with RTX graphics.",
+    "images": [
+      "https://i.imgur.com/AUdrQ9L.jpeg"
+    ],
+    "category": {
+      "name": "Electronics"
+    }
+  },
+  {
+    "id": 14,
+    "title": "4K Smart TV",
+    "price": 899,
+    "description": "Ultra HD 4K Smart TV with streaming apps.",
+    "images": [
+      "https://i.imgur.com/UvPXsPp.jpeg"
+    ],
+    "category": {
+      "name": "Electronics"
+    }
+  },
+  {
+    "id": 15,
+    "title": "Wireless Earbuds",
+    "price": 75,
+    "description": "Compact and stylish wireless earbuds.",
+    "images": [
+      "https://i.imgur.com/KHvJJHv.jpeg"
+    ],
+    "category": {
+      "name": "Electronics"
+    }
+  },
+  {
+    "id": 16,
+    "title": "Tablet 10-inch",
+    "price": 450,
+    "description": "10-inch tablet with high-resolution display.",
+    "images": [
+      "https://i.imgur.com/NZhfTJ6.jpeg"
+    ],
+    "category": {
+      "name": "Electronics"
+    }
+  },
+  {
+    "id": 17,
+    "title": "Smartwatch",
+    "price": 199,
+    "description": "Feature-rich smartwatch with health tracking.",
+    "images": [
+      "https://i.imgur.com/QK9gGVZ.jpeg"
+    ],
+    "category": {
+      "name": "Electronics"
+    }
+  },
+  {
+    "id": 18,
+    "title": "Gaming Mouse",
+    "price": 45,
+    "description": "Ergonomic gaming mouse with customizable buttons.",
+    "images": [
+      "https://i.imgur.com/G45PzJ9.jpeg"
+    ],
+    "category": {
+      "name": "Electronics"
+    }
+  },
+  {
+    "id": 19,
+    "title": "Mechanical Keyboard",
+    "price": 120,
+    "description": "RGB backlit mechanical keyboard.",
+    "images": [
+      "https://i.imgur.com/W9PQjWV.jpeg"
+    ],
+    "category": {
+      "name": "Electronics"
+    }
+  },
+  {
+    "id": 20,
+    "title": "Portable Bluetooth Speaker",
+    "price": 80,
+    "description": "Waterproof Bluetooth speaker with deep bass.",
+    "images": [
+      "https://i.imgur.com/C6QhZnR.jpeg"
+    ],
+    "category": {
+      "name": "Electronics"
+    }
+  }
+]

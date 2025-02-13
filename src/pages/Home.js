@@ -1,36 +1,20 @@
-import { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { getProducts } from '../store/productsSlice'
+import { useState } from 'react'
+import { useSelector } from 'react-redux'
 import ProductCard from '../components/ProductCard'
-import axiosClient from '../api/axiosClient'
+import useProducts from '../hooks/useProducts'
 import '../styles/Home.css'
 
 function Home() {
-  const dispatch = useDispatch()
-  const items = useSelector((state) => state.products.items)
+  const { products, loading } = useProducts()
   const [filters, setFilters] = useState({
     title: '',
     category: '',
     priceMin: '',
     priceMax: '',
   })
-  const [categories, setCategories] = useState([])
   const [currentPage, setCurrentPage] = useState(1)
   const itemsPerPage = 8
-
-  useEffect(() => {
-    dispatch(getProducts())
-    fetchCategories()
-  }, [dispatch])
-
-  const fetchCategories = async () => {
-    try {
-      const response = await axiosClient.get('/categories')
-      setCategories(response.data)
-    } catch (error) {
-      console.error('Error fetching categories:', error)
-    }
-  }
+  const categories = useSelector((state) => state.products.categories)
 
   const handleFilterChange = (e) => {
     setFilters({ ...filters, [e.target.name]: e.target.value })
@@ -42,12 +26,15 @@ function Home() {
     setCurrentPage(1)
   }
 
-  const filteredProducts = items.filter((product) => {
+  if (loading) return <p>Loading products...</p>
+
+  const filteredProducts = products.filter((product) => {
     return (
       (!filters.title ||
         product.title.toLowerCase().includes(filters.title.toLowerCase())) &&
       (!filters.category ||
-        product.category?.id === Number(filters.category)) &&
+        product.category?.name.toLowerCase() ===
+          filters.category.toLowerCase()) &&
       (!filters.priceMin || product.price >= Number(filters.priceMin)) &&
       (!filters.priceMax || product.price <= Number(filters.priceMax))
     )
@@ -77,8 +64,8 @@ function Home() {
           onChange={handleFilterChange}
         >
           <option value=''>All Categories</option>
-          {categories.map((cat) => (
-            <option key={cat.id} value={cat.id}>
+          {categories?.map((cat) => (
+            <option key={cat.name} value={cat.name}>
               {cat.name}
             </option>
           ))}
