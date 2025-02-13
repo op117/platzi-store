@@ -2,7 +2,27 @@ import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 
 function ProductCard({ product }) {
-  const placeholderImage = '/assets/no_image_available.svg'
+  const categoryImages = {
+    Clothes: '/assets/Clothes.png',
+    Electronics: '/assets/Electronics.png',
+    Furniture: '/assets/Furniture.png',
+    Shoes: '/assets/Shoes.png',
+    Miscellaneous: '/assets/Miscellaneous.png',
+    Grocery: '/assets/Grocery.png',
+  }
+
+  const normalizeCategory = (category) => {
+    if (!category || typeof category !== 'object' || !category.name) return null
+    return Object.keys(categoryImages).find(
+      (key) => key.toLowerCase() === category.name.toLowerCase().trim()
+    )
+  }
+
+  const categoryKey = normalizeCategory(product.category)
+  const placeholderImage = categoryKey
+    ? categoryImages[categoryKey]
+    : '/assets/no_image_available.svg'
+
   const [imageUrl, setImageUrl] = useState(placeholderImage)
 
   useEffect(() => {
@@ -12,7 +32,7 @@ function ProductCard({ product }) {
       img.onload = () => setImageUrl(img.src)
       img.onerror = () => setImageUrl(placeholderImage)
     }
-  }, [product.images])
+  }, [product.images, placeholderImage])
 
   return (
     <div className='product-card'>

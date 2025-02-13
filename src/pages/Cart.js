@@ -1,8 +1,17 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { removeFromCart, clearCart } from '../store/cartSlice'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import '../styles/Cart.css'
+
+const categoryImages = {
+  Clothes: '/assets/Clothes.png',
+  Electronics: '/assets/Electronics.png',
+  Furniture: '/assets/Furniture.png',
+  Shoes: '/assets/Shoes.png',
+  Miscellaneous: '/assets/Miscellaneous.png',
+  Grocery: '/assets/Grocery.png',
+}
 
 function Cart() {
   const cart = useSelector((state) => state.cart)
@@ -10,7 +19,32 @@ function Cart() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [expandedItems, setExpandedItems] = useState({})
+  const [imageUrls, setImageUrls] = useState({})
   const placeholderImage = '/assets/no_image_available.svg'
+
+  useEffect(() => {
+    const updatedImageUrls = {}
+
+    cart.forEach((item) => {
+      const categoryKey =
+        item?.category?.name && categoryImages[item.category.name]
+          ? categoryImages[item.category.name]
+          : placeholderImage
+
+      if (Array.isArray(item.images) && item.images.length > 0) {
+        const img = new Image()
+        img.src = item.images[0].replace(/^"|"$/g, '')
+        img.onload = () =>
+          setImageUrls((prev) => ({ ...prev, [item.id]: img.src }))
+        img.onerror = () =>
+          setImageUrls((prev) => ({ ...prev, [item.id]: categoryKey }))
+      } else {
+        updatedImageUrls[item.id] = categoryKey
+      }
+    })
+
+    setImageUrls((prev) => ({ ...prev, ...updatedImageUrls }))
+  }, [cart])
 
   if (!user) {
     return (
@@ -39,7 +73,7 @@ function Cart() {
           {cart.map((item) => (
             <div key={item.id} className='cart-item'>
               <img
-                src={item.images?.[0] || placeholderImage}
+                src={imageUrls[item.id] || placeholderImage}
                 alt={item.title}
                 onError={(e) => (e.target.src = placeholderImage)}
               />
