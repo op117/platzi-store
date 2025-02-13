@@ -1,46 +1,78 @@
-# Getting Started with Create React App and Redux
+# Platzi Store - React eCommerce App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
+## 📌 Project Description
 
-## Available Scripts
+Platzi Store is an eCommerce application built using React, Redux Toolkit, and React Router. It allows users to browse products, add them to a cart, proceed to checkout, and manage authentication via an API.
 
-In the project directory, you can run:
+## 🚀 Features
 
-### `npm start`
+✅ **Browse product listings** with filtering and pagination  
+✅ **Product detail page**  
+✅ **Add products to cart** (stored in `localStorage` for session duration)  
+✅ **Checkout page (mock implementation)**  
+✅ **User registration and authentication** via JWT  
+✅ **Redirect after login** to `Home` and display the logged-in user's name  
+✅ **Dynamic Header** displaying the cart item count  
+✅ **Responsive UI for mobile and desktop devices**
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 📂 Project Structure
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```
+platzi-store/
+│── public/
+│   ├── assets/ (static images)
+|   ├── index.html
+│── src/
+│   ├── api/ (axios configuration for API)
+│   ├── components/ (reusable UI components)
+│   ├── pages/ (application pages)
+│   ├── store/ (Redux Toolkit state management)
+│   ├── styles/ (CSS files)
+|   ├── App.js
+|   ├── index.js
+│── .gitignore
+├── package-lock.json
+│── package.json
+│── README.md
+```
 
-### `npm test`
+## 🔧 Technologies Used
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **React** (functional components, hooks)
+- **Redux Toolkit** (state management for cart, authentication, filters)
+- **React Router** (multi-page routing)
+- **Axios** (API requests to FakeAPI Platzi Store)
+- **CSS (responsive design)**
 
-### `npm run build`
+## 📦 Installation and Setup
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. Clone the repository (SSH) :
+   ```sh
+   git clone git@github.com:op117/platzi-store.git
+   ```
+2. Install dependencies:
+   ```sh
+   npm install
+   ```
+3. Start the local server:
+   ```sh
+   npm start
+   ```
+4. The application will be available at: `http://localhost:3000/`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 🛠 How to Use
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. **Register** or log in.
+2. **Browse products**, filter them, and add to the cart.
+3. **Go to the cart** to review added items.
+4. **Proceed to checkout** (mock implementation).
 
-### `npm run eject`
+## 📌 API (FakeAPI Platzi Store)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+We use `https://fakeapi.platzi.com/`, which provides:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+- `GET /products` — fetch product list
+- `GET /products/:id` — fetch product details
+- `POST /users` — register a new user
+- `POST /auth/login` — authenticate (JWT token)
+- `GET /auth/profile` — fetch authenticated user profile
